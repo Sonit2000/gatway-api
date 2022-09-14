@@ -60,17 +60,12 @@
     }
     public static class ResponseStatusExtension{
         private static readonly Dictionary<string, string> _descriptions = new(StringComparer.CurrentCultureIgnoreCase);
-        //public static string GetDescription(this ResponseStatus response, string language = "en")
-        //{
-        //    _descriptions.TryGetValue($"{response}_{language}", out string description);
-        //    return description;
-        //}
-        public static string GetResponseCode(this ResponseStatus response) => ((int)response).ToString("D3");
         public static string GetDescription(this ResponseStatus response, string language = "en")
         {
             _descriptions.TryGetValue($"{response}_{language}", out string description);
-            return description;
+          return description;
         }
+        public static string GetResponseCode(this ResponseStatus response) => ((int)response).ToString("D3");
     }
 
 }

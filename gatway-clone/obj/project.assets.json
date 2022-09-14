@@ -4245,11 +4245,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\Source\\Repos\\Sonit2000\\gatway-api\\gatway-clone\\gatway-clone.csproj",
+      "projectUniqueName": "D:\\gatway-api\\gatway-clone\\gatway-clone.csproj",
       "projectName": "gatway-clone",
-      "projectPath": "C:\\Users\\DELL\\Source\\Repos\\Sonit2000\\gatway-api\\gatway-clone\\gatway-clone.csproj",
+      "projectPath": "D:\\gatway-api\\gatway-clone\\gatway-clone.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\Source\\Repos\\Sonit2000\\gatway-api\\gatway-clone\\obj\\",
+      "outputPath": "D:\\gatway-api\\gatway-clone\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",

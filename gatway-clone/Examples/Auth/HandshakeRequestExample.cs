@@ -9,7 +9,6 @@ public  class HandshakeRequestExample : ExampleBase<HandshakeRequest, HandshakeR
 {
     public override IEnumerable<SwaggerExample<RequestDTO<HandshakeRequest>>> GetSwaggerExamples()
     {
-
         yield return CreateExample("Success", new()
         {
             PublicKey = Hex.ToHexString(CryptoUtil.ECDH.GenerateKeyPair("secp256r1").GetPublicKey())

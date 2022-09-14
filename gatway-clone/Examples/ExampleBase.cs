@@ -29,7 +29,7 @@ public abstract class ExampleBase<TResponse> : MultipleExamplesProvider<Response
             RequestID = Guid.NewGuid().ToString(),
             Data = data,
             ResponseCode = responseStatus.GetResponseCode(),
-            //Description = responseStatus.GetDescription("vi"),
+            Description = responseStatus.GetDescription("vi"),
             Status = responseStatus
         });
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3+Zo3HJ/SvFlp8ztDErINWRgFkT6MD+dJcWSLUvV1TV4zjb/b5q3NrcylDGSPt2lK4/l5uSSTQRwIUYKDdRTvQ==",
+  "dgSpecHash": "MCtafrYKoIB8aD4uQ1FI3bME8lYpVsHMlUHGB9VTdd8dPChTHA0zFRmS5khiLq3dUqrBq+6eaHm7vof4+37gyg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\Source\\Repos\\Sonit2000\\gatway-api\\gatway-clone\\gatway-clone.csproj",
+  "projectFilePath": "D:\\gatway-api\\gatway-clone\\gatway-clone.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\log4net\\2.0.13\\log4net.2.0.13.nupkg.sha512",

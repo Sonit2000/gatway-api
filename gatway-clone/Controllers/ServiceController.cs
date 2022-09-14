@@ -35,7 +35,7 @@ public abstract class ServiceController<TRequest, TResponse> : ControllerBase
         }
         RequestDTO = requestDTO;
         string path = Request.Path.ToString().ToLower();
-        ResponseDTO<TResponse> responseDTO = null;
+        ResponseDTO<TResponse> responseDTO;
         _logger.LogDebug($"{RequestDTO.LMID}: Service: {path[1..]}. IP: {HttpContext.GetIP()}. User: {HttpContext.User.Identity?.Name ?? "guest"}. ReqID: {RequestDTO.RequestID}. ReqDateTime: {RequestDTO.RequestDateTime}. Language: {requestDTO.Language}. X-Session-ID: {Request.Headers["X-Session-ID"].FirstOrDefault()}");
         if (!string.IsNullOrEmpty(requestDTO.UserAgent))
         {
@@ -48,10 +48,6 @@ public abstract class ServiceController<TRequest, TResponse> : ControllerBase
             {
                 responseDTO = await BuildResponse(ResponseStatus.UserForbidden);
             }
-            //else if (await RequestIDCache.Instance.GetAsync(RequestDTO.LMID, RequestDTO.RequestID) != null) //check duplicate request
-            //{
-            //    responseDTO = await BuildResponse(ResponseStatus.DuplicationRequest);
-            //}
             else if (!DateTime.TryParse(requestDTO.RequestDateTime, out DateTime requestDateTime) || Math.Abs((DateTime.Now - requestDateTime).TotalSeconds) > _maxDriftTimestamp.TotalSeconds)
             {
                 responseDTO = await BuildResponse(ResponseStatus.InvalidDateTime);
@@ -62,7 +58,6 @@ public abstract class ServiceController<TRequest, TResponse> : ControllerBase
             }
             else
             {
-                //await RequestIDCache.Instance.AddAsync(RequestDTO.LMID, RequestDTO.RequestID);
                 Task<ResponseDTO<TResponse>> task = Process().HandleExceptions(requestDTO.LMID);
                 GlobalTasks.Tasks.Add(task);
                 responseDTO = await task.TimeoutAfter(FunctionTimeout) ? await ProcessTimeout() : await task;
@@ -74,8 +69,8 @@ public abstract class ServiceController<TRequest, TResponse> : ControllerBase
             responseDTO = await BuildResponse(ResponseStatus.InternalServerError);
         }
         responseDTO.ResponseCode = responseDTO.Status.GetResponseCode();
-        //responseDTO.Description = responseDTO.Status.GetDescription(requestDTO.Language);
-        //_logger.LogDebug($"{RequestDTO.LMID}: RC: {responseDTO.ResponseCode}[{responseDTO.Status}]. Elapsed: {DateTime.Now.Subtract(responseDTO.CreatedDate)}. ResData: {DataMasking.MaskJson(responseDTO.Data) ?? "null"}. Desc: {responseDTO.Description}");
+        responseDTO.Description = responseDTO.Status.GetDescription(requestDTO.Language);
+        _logger.LogDebug($"{RequestDTO.LMID}: RC: {responseDTO.ResponseCode}[{responseDTO.Status}]. Elapsed: {DateTime.Now.Subtract(responseDTO.CreatedDate)}. ResData: {DataMasking.MaskJson(responseDTO.Data) ?? "null"}. Desc: {responseDTO.Description}");
         return responseDTO;
     }
 

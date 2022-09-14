@@ -14,5 +14,6 @@ public class BaseConfiguration
       .AddJsonFile(Path.Combine(AppContext.BaseDirectory, "appsettings.local.json"), true)
       .Build();
     public static readonly ImmutableDictionary<string, string> DataMaskings = (_appSettings.GetSection("DataMaskings").Get<Dictionary<string, string>>() ?? new Dictionary<string, string>()).ToImmutableDictionary(StringComparer.OrdinalIgnoreCase);
+
     public static readonly string Log4NetConfigurationPath = _appSettings["Log4NetConfigurationPath"];
 }

@@ -17,10 +17,11 @@ public class HandshakeController : AuthController<HandshakeRequest, HandshakeRes
         };
         AsymmetricCipherKeyPair keyPair = CryptoUtil.ECDH.GenerateKeyPair("secp256r1");
         byte[] sharedKey = CryptoUtil.ECDH.GetKeyShared(keyPair, Hex.Decode(RequestData.PublicKey));
-        //ResponseData.SessionKey = Hex.ToHexString(CryptoUtil.Encrypt(sharedKey, sessionObject.SessionKey));
+        ResponseData.SessionKey = Hex.ToHexString(CryptoUtil.Encrypt(sharedKey, sessionObject.SessionKey));
         ResponseData.Salt = CryptoUtil.Encrypt(sharedKey, sessionObject.Salt);
         ResponseData.PublicKey = Hex.ToHexString(keyPair.GetPublicKey());
         //await SessionKeyCache.Instance.AddAsync(RequestDTO.LMID, sessionObject);
         return await BuildResponse(ResponseStatus.Success);
+        
     }
 }
